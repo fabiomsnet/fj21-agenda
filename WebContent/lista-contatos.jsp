@@ -13,7 +13,6 @@
 	<%@ include file="cabecalho.jsp"%>
 	
 	<!-- cria o DAO -->
-	<jsp:useBean id="dao" class="br.com.caelum.agenda.dao.ContatoDao" />
 
 	<table id="tabContatos">
 		<tr>
@@ -23,7 +22,7 @@
 			<th>Data de Nascimento:</th>
 		</tr>
 		<!-- percorre contatos montando as linhas da tabela -->
-		<c:forEach var="contato" items="${dao.lista }">
+		<c:forEach var="contato" items="${contatos}">
 			<tr>
 				<td>${contato.nome}</td>
 				<td><c:if test="${not empty contato.email}">
@@ -33,6 +32,9 @@
 					</c:if></td>
 				<td>${contato.endereco}</td>
 				<td><fmt:formatDate value="${contato.dataNascimento.time}" pattern="dd/MM/yyyy"/></td>
+				<td>
+					<a href="mvc?logica=RemoveContatoLogic&id=${contato.id}">Remover</a>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>
